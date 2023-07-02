@@ -1,0 +1,43 @@
+@tailwind base;
+
+a {
+  @apply text-blue-700;
+}
+
+a:hover {
+  @apply border-b-2 border-blue-700;
+}
+
+@tailwind components;
+
+@tailwind utilities;
+
+.Toastify__toast {
+  font-size: 0.9375rem !important;
+  color: rgb(0, 0, 0) !important;
+  @apply font-courierPrime !important;
+  font-weight: 700 !important;
+}
+
+.content p {
+  @apply my-6;
+}
+
+.content ul {
+  @apply my-6;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  width: 20rem;
+}
+
+@media (max-width: 570px) {
+  form {
+    width: 100%;
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "noFallthroughCasesInSwitch": true,
+    "target": "es5",
+    "outDir": "out",
+    "declaration": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
+    "noEmit": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/public/*": [
+        "public/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "@layout/*": [
+        "src/layout/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@assets/*": [
+        "public/assets/*"
+      ],
+      "@lib/*": [
+        "src/lib/*"
+      ],
+      "@models/*": [
+        "src/models/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ]
+    }
+  },
+  "exclude": [
+    "./out/**/*",
+    "./node_modules/**/*",
+    "cypress/**/*.ts"
+  ],
+  "include": [
+    "next-env.d.js",
+    "declarations.d.js",
+    "**/*.ts",
+    "**/*.tsx",
+    ".storybook/*.ts",
+    "next-auth.d.js",
+    "process.d.ts", "src/components/navbar.jsx", "src/database/conn.js", "src/layouts/Meta.test.jsx", "src/layouts/Meta.jsx", "src/lib/validate.jsx", "src/models/user/user.methods.js", "src/models/user/user.model.js", "src/models/user/user.schema.js", "src/models/user/user.static.js", "src/models/user/user.types.js", "src/pages/api/auth/[...nextauth].js", "src/pages/api/signup.js", "src/pages/_document.jsx", "src/pages/about.jsx", "src/pages/forgot.jsx", "src/pages/index.jsx", "src/pages/signin.jsx", "src/pages/signup.jsx", "src/templates/Main.stories.jsx", "src/templates/Main.test.jsx", "src/templates/Main.jsx", "src/pages/_app.jsx", "src/pages/home.jsx", "src/lib/toast.js", "src/models/books/book.model.js", "src/models/books/book.schema.js", "src/models/books/book.types.js", "src/utils/handler.ts", "src/utils/AppConfig.ts",
+  ]
+}

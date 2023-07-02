@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+  @apply bg-dark text-white;
+}
+
+::-webkit-scrollbar {
+  @apply h-1 w-1;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-orange-200;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dark;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+h4 {
+  @apply text-2xl text-white tracking-wide border-b-2 border-b-white mb-2 mx-2;
+  font-family: "Open Sans", serif;
+}
+
+form {
+  @apply w-full flex flex-wrap;
+}
