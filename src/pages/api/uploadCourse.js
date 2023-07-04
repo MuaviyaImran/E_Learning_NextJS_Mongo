@@ -1,6 +1,7 @@
 import cloudinary from "cloudinary";
 import multiparty from "multiparty";
 import CourseModel from "../../models/course/course.model";
+import quizCourseTitleModel from "../../models/quizCourseTitle/quizCourseTitle.model";
 import dbConnect from "../../database/conn";
 
 cloudinary.v2.config({
@@ -39,6 +40,7 @@ export default async function uploadCourseHandler(req, res) {
         })
         .then(async (res) => {
           const mongoose = require("mongoose");
+          console.log(fields)
           await dbConnect();
           const videoURL = res.secure_url;
           const courseName = fields.courseName[0];
@@ -60,10 +62,17 @@ export default async function uploadCourseHandler(req, res) {
             subjectName: subjectName,
             role: role,
             approved: approved,
-            // enrolled: [],
+            enrolled: [],
           });
 
-          await newCourse.save();
+          await newCourse.save().then(async (res) => {
+            // const CourseTitle = new quizCourseTitleModel({
+            //   courseID: res._id,
+            //   courseName: courseName,
+            //   teacherName: name,
+            // });
+            // await CourseTitle.save();
+          });
         });
 
       return res

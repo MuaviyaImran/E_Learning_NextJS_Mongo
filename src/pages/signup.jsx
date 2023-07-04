@@ -55,6 +55,7 @@ export default function Signup() {
               role: selectedOption,
               phone: values.phone,
               education: education !== "" ? education : education,
+              courses: [],
             }),
             headers: {
               "Content-Type": "application/json",
@@ -84,7 +85,7 @@ export default function Signup() {
       </Head>
       {/* <Main> */}
       <ToastContainer />
-      <section className="flex items-center justify-center min-h-screen">
+      <section className="flex min-h-screen items-center justify-center">
         <div className="w-3/4">
           <div className="title">
             <h1 className="text-center text-4xl font-bold text-gray-800">
@@ -194,7 +195,7 @@ export default function Signup() {
               <select
                 value={selectedOption}
                 onChange={handleOptionChange}
-                className="appearance-none bg-white border border-gray-300 rounded px-4 py-2 pr-8 focus:outline-none focus:border-blue-500"
+                className="appearance-none rounded border border-gray-300 bg-white px-4 py-2 pr-8 focus:border-blue-500 focus:outline-none"
               >
                 <option value="">Select an option</option>
                 <option value="teacher">Teacher</option>
@@ -221,7 +222,7 @@ export default function Signup() {
               )}
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
-                  className="fill-current h-4 w-4"
+                  className="h-4 w-4 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                 >

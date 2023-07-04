@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Navbar from "../components/navbar";
+import PulseLoader from "react-spinners/PulseLoader";
 
 const Card = ({ users }) => {
   const {
@@ -46,17 +47,20 @@ const Card = ({ users }) => {
 const CardList = () => {
   const session = useSession();
   const [users, setUsers] = useState();
+  const [loading, setLoading] = useState(false);
   const getUsers = async () => {
     try {
+      setLoading(true);
       const response = await fetch("/api/getUsersList", {
         method: "GET",
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(users);
         setUsers(data.users);
+        setLoading(false);
       } else {
         setUsers([]);
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -72,12 +76,16 @@ const CardList = () => {
         <Navbar />
       </header>
       <div className="container mx-auto py-8">
-      <h1 className="mb-4 text-2xl font-semibold">User's Collection</h1>
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {users?.map((item) => (
-          <Card key={item._id} users={item} />
-        ))}
-      </div>
+        <h1 className="mb-4 text-2xl font-semibold">User's Collection</h1>
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {loading ? (
+            <div className="visible flex items-center justify-center">
+              <PulseLoader color="#FF854A" size={20} />
+            </div>
+          ) : (
+            users?.map((item) => <Card key={item._id} users={item} />)
+          )}
+        </div>
       </div>
     </>
   );

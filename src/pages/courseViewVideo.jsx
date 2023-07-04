@@ -13,10 +13,8 @@ const CourseDetails = () => {
   const session = useSession().data;
   const [courseDetails, setCourseDetails] = useState();
   const [loading, setLoading] = useState(false);
-  const [iAmEnrolled, seIAmEnrolled] = useState(false);
 
   const { courseID } = router.query;
-
   const getCourseDetails = async () => {
     setLoading(true);
     try {
@@ -28,9 +26,8 @@ const CourseDetails = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        seIAmEnrolled(data.enrolled.includes(session.user.id))
+        console.log(data);
         setCourseDetails(data); // Assuming the API response returns the books array directly
-
       } else {
         const errorData = await response.json();
         showToast(errorData.message);
@@ -46,42 +43,7 @@ const CourseDetails = () => {
       getCourseDetails();
     }
   }, [session]);
-
-  const handleViewCourse = () => {
-    router.push({
-      pathname: "/courseViewVideo",
-      query: { courseID: courseDetails._id },
-    });
-  }
-  const handleEnrollMe = async () => {
-    try {
-      const requestBody = {
-        courseID: courseDetails._id,
-        userID: session?.user?.id,
-      };
-      const response = await fetch("/api/handleEnroll", {
-        method: "POST",
-        body: JSON.stringify(requestBody),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        showToast("You have been enrolled Successfully.");
-        router.push({
-          pathname: "/courseViewVideo",
-          query: { courseID: courseDetails._id },
-        });
-        
-      } else {
-        const errorData = await response.json();
-        showToast(errorData.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      showToast("Failed to enroll in the course.");
-    }
-  };
+  useEffect(() => {}, [courseDetails]);
 
   return (
     <div className="">
@@ -97,12 +59,7 @@ const CourseDetails = () => {
         ) : (
           <>
             <div className="hidden md:block md:w-1/2">
-              
-              <img
-                className="h-full w-full object-cover object-center"
-                src="/assets/images/Online-Course.png"
-                alt="Book Cover"
-              />
+              <VidPlayer videoUrl={courseDetails?.videoURL} />
             </div>
             <div className="mx-auto max-w-md p-6">
               <h2 className="mb-4 text-2xl">Course Details</h2>
@@ -153,27 +110,6 @@ const CourseDetails = () => {
                     value={courseDetails?.email}
                   />
                 </label>
-                {iAmEnrolled ? (<div className="text-center ">
-                  <p className="mb-5 text-[red] font-[600]">You Are Already Enrolled</p>
-                  <button
-                    onClick={handleViewCourse}
-                    type="button"
-                    className={`cursor-pointer  rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-[#000000]
-                    `}
-                  >
-                    View Course
-                  </button>
-                </div>):(<div className="text-center ">
-                  <button
-                    onClick={handleEnrollMe}
-                    type="button"
-                    className={`cursor-pointer  rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-[#000000]
-                    `}
-                  >
-                    Enroll Me
-                  </button>
-                </div>)}
-                
               </form>
             </div>
           </>

@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { Schema } from "mongoose";
 import validator from "validator";
-
+import mongoose from "mongoose";
 import { comparePassword } from "@models/user/user.methods";
 import { findOneOrCreate } from "@models/user/user.static";
 
@@ -43,6 +43,10 @@ const userSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  courses: {
+    type: [mongoose.Types.ObjectId], // Array of mongoose ObjectIds
+    default: [], // Initialize as an empty array
   },
 });
 

@@ -6,10 +6,6 @@ const courseSchema = new Schema({
     type: String,
     required: true,
   },
-  subjectName: {
-    type: String,
-    required: true,
-  },
   userID: {
     type: mongoose.Types.ObjectId,
     required: true,
@@ -38,12 +34,10 @@ const courseSchema = new Schema({
     type: Boolean,
     required: true,
   },
-  // enrolled: [
-  //   {
-  //     type: mongoose.Types.ObjectId,
-  //     ref: "User",
-  //   },
-  // ],
+  enrolled: {
+    type: [mongoose.Types.ObjectId], // Array of mongoose ObjectIds
+    default: [], // Initialize as an empty array
+  },
 });
 
 export default courseSchema;

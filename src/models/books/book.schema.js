@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
 const bookSchema = new Schema({
-  title: {
+  BookTitle: {
     type: String,
     required: true,
   },
@@ -19,16 +19,20 @@ const bookSchema = new Schema({
     type: String,
     required: true,
   },
-  bookCover: {
-    type: String,
-    required: true,
-  },
   uploadedByName: {
     type: String,
     required: true,
   },
-  uploadedBy: {
+  uploadedByID: {
     type: mongoose.Types.ObjectId,
+    required: true,
+  },
+  role: {
+    type: String,
+    required: true,
+  },
+  approved: {
+    type: Boolean,
     required: true,
   },
 });

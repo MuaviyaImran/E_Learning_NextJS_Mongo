@@ -6,6 +6,10 @@ import { ToastContainer } from "react-toastify";
 import showToast from "../lib/toast";
 import { useSession } from "next-auth/react";
 import { PulseLoader } from "react-spinners";
+import { Button, Card, Input, List, message, Image, Progress } from "antd";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebaseConfig";
+
 const BookUploadForm = () => {
   const router = useRouter();
   const session = useSession().data;
@@ -15,44 +19,80 @@ const BookUploadForm = () => {
   const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState("");
   const [bookFile, setBookFile] = useState(null);
-
+  const [downloadURL, setDownloadURL] = useState("");
   useEffect(() => {
     setIsFilled(title && author && description && bookFile);
   }, [title, author, description, bookFile]);
+  useEffect(() => {
+    console.log(downloadURL);
+  }, [downloadURL]);
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    // Form validation logic goes here
-    setLoading(true);
-    setIsFilled(true);
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("author", author);
-    formData.append("description", description);
-    formData.append("book", bookFile);
-    formData.append("uploadedByUserID", session.user.id);
-    formData.append("uploadedByName", session.user.name);
+  const handleUploadFile = () => {
+    if (bookFile) {
+      setLoading(true);
+      setIsFilled(true);
+      const name = bookFile.name;
+      const storageRef = ref(storage, `Books/${name}`);
+      const uploadTask = uploadBytesResumable(storageRef, bookFile);
+      console.log("name", name, "uploadTask", uploadTask);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+          }
+        },
+        (error) => {
+          message.error(error.message);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
+            //url is download url of file
+            const body = {
+              title: title,
+              author: author,
+              description: description,
+              book: url,
+              uploadedByUserID: session.user.id,
+              uploadedByName: session.user.name,
+              email: session.user.email,
+              role: session.user.role,
+            };
 
-    try {
-      const response = await fetch("/api/uploadBook", {
-        method: "POST",
-        body: formData,
-      });
+            try {
+              const response = await fetch("/api/uploadBook", {
+                method: "POST",
+                body: JSON.stringify(body),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
 
-      if (response.ok) {
-        showToast("Book uploaded successfully.");
-        router.push("/");
-      } else {
-        const data = await response.json();
-        showToast(data.message);
-      }
-    } catch (error) {
-      console.error("catch", error);
-      showToast("Failed to upload book.");
+              if (response.ok) {
+                showToast("Book uploaded successfully.");
+                router.push("/");
+              } else {
+                const data = await response.json();
+                showToast(data.message);
+              }
+            } catch (error) {
+              console.error("catch", error);
+              showToast("Failed to upload book.");
+            }
+            setLoading(false);
+            setDownloadURL(url);
+          });
+        }
+      );
+    } else {
+      message.error("File not found");
     }
-    setLoading(false);
   };
-
   return (
     <div className="">
       <header>
@@ -75,7 +115,7 @@ const BookUploadForm = () => {
             </div>
             <div className="mx-auto max-w-md p-6">
               <h2 className="mb-4 text-2xl">Upload Book</h2>
-              <form onSubmit={handleFormSubmit}>
+              <form>
                 <label className="mb-4 block">
                   <span className="text-gray-700">Title:</span>
                   <input
@@ -115,8 +155,9 @@ const BookUploadForm = () => {
                 </label>
                 <div className="text-center ">
                   <button
+                    onClick={handleUploadFile}
                     disabled={!isFilled}
-                    type="submit"
+                    type="button"
                     className={`rounded-md  bg-[#FFC1A3] px-4 py-2 text-white ${
                       isFilled
                         ? "cursor-pointer hover:bg-[#FFC1A3]"

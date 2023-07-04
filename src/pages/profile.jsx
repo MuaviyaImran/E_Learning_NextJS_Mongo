@@ -35,7 +35,6 @@ const Profile = () => {
         }
       );
       const data = await response.json(); // Convert the response to JSON
-      console.log(data);
       setProfile(data.profile);
       setFName(data.profile?.firstname);
       setLName(data.profile?.lastname);
@@ -63,7 +62,6 @@ const Profile = () => {
       userID: session?.user?.id,
       email: email,
     };
-    console.log("body", requestBody);
     try {
       const response = await fetch("/api/updateProfile", {
         method: "POST",

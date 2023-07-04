@@ -16,7 +16,6 @@ const Dropzone = ({ className }) => {
   const [courseName, setCourseName] = useState("");
   const [details, setDetails] = useState("");
   const [teacherName, setTeacherName] = useState("");
-  const [subjectName, setSubjectName] = useState("");
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -43,13 +42,12 @@ const Dropzone = ({ className }) => {
   });
 
   useEffect(() => {
-    console.log(files);
     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
   }, [files]);
 
-  async function action() {
+  const action = async () => {
     const file = files[0];
-    if (!file || !courseName || !details || !subjectName) {
+    if (!file || !courseName || !details) {
       showToast("Empty Fields Found");
     } else {
       setLoading(true);
@@ -61,28 +59,28 @@ const Dropzone = ({ className }) => {
       formData.append("name", teacherName);
       formData.append("email", session?.user?.email);
       formData.append("userID", session?.user?.id);
-      formData.append("subjectName", subjectName);
       formData.append("role", session?.user?.role);
-
-      try {
-        const response = await fetch("/api/uploadCourse", {
-          method: "POST",
-          body: formData,
-        });
-console.log(response)
-        if (response.ok) {
-          router.push("/");
-        } else {
-          showToast("Error occurred while uploading course");
+      console.log(formData);
+      if (formData) {
+        try {
+          const response = await fetch("/api/uploadCourse", {
+            method: "POST",
+            body: formData,
+          });
+          if (response.ok) {
+            router.push("/");
+          } else {
+            showToast(err, "Error occurred while uploading course");
+            setLoading(false);
+          }
+        } catch (err) {
+          console.error("error", err);
           setLoading(false);
+          showToast(err, "Error occurred while uploading course");
         }
-      } catch (err) {
-        console.error("error",err);
-        setLoading(false);
-        showToast("Error occurred while uploading course");
       }
     }
-  }
+  };
 
   return (
     <>
@@ -121,21 +119,12 @@ console.log(response)
                   value={session?.user?.name || ""}
                 />
               </label>
-              <label className="mb-4 block">
-                <span className="text-gray-700">Subject Name:</span>
-                <input
-                  type="text"
-                  className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
-                  value={subjectName}
-                  onChange={(e) => setSubjectName(e.target.value)}
-                />
-              </label>
             </div>
           </section>
           <span className="text-gray-700">Upload Video:</span>
           <div {...getRootProps({ className: className })}>
             <input {...getInputProps({ name: "file" })} />
-            <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex cursor-pointer flex-col items-center justify-center gap-4">
               <ArrowUpTrayIcon className="h-5 w-5 fill-current" />
               {isDragActive ? (
                 <p>Drop the files here ...</p>

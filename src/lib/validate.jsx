@@ -29,7 +29,7 @@ export function validateRegister(values) {
   }
   if (!values.phone) {
     errors.phone = "Required";
-  } else if (values.phone.length != 10) {
+  } else if (values.phone.length != 11) {
     errors.phone = "Invalid Phone Number...!";
   }
 
