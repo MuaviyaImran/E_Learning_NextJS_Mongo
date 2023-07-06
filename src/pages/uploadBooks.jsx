@@ -19,13 +19,10 @@ const BookUploadForm = () => {
   const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState("");
   const [bookFile, setBookFile] = useState(null);
-  const [downloadURL, setDownloadURL] = useState("");
+
   useEffect(() => {
     setIsFilled(title && author && description && bookFile);
   }, [title, author, description, bookFile]);
-  useEffect(() => {
-    console.log(downloadURL);
-  }, [downloadURL]);
 
   const handleUploadFile = () => {
     if (bookFile) {
@@ -34,16 +31,15 @@ const BookUploadForm = () => {
       const name = bookFile.name;
       const storageRef = ref(storage, `Books/${name}`);
       const uploadTask = uploadBytesResumable(storageRef, bookFile);
-      console.log("name", name, "uploadTask", uploadTask);
       uploadTask.on(
         "state_changed",
         (snapshot) => {
           switch (snapshot.state) {
             case "paused":
-              console.log("Upload is paused");
+              showToast("Upload is paused");
               break;
             case "running":
-              console.log("Upload is running");
+              showToast("Upload is running");
               break;
           }
         },
@@ -85,7 +81,6 @@ const BookUploadForm = () => {
               showToast("Failed to upload book.");
             }
             setLoading(false);
-            setDownloadURL(url);
           });
         }
       );

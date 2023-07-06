@@ -10,6 +10,10 @@ const courseSchema = new Schema({
     type: mongoose.Types.ObjectId,
     required: true,
   },
+  quizID: {
+    type: mongoose.Types.ObjectId,
+    default: null,
+  },
   email: {
     type: String,
     required: true,

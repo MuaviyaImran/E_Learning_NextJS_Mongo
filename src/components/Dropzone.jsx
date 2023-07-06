@@ -6,81 +6,80 @@ import showToast from "../lib/toast";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
 import PulseLoader from "react-spinners/PulseLoader";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebaseConfig";
 
-const Dropzone = ({ className }) => {
+const Dropzone = () => {
   const session = useSession().data;
   const router = useRouter();
-  const [files, setFiles] = useState([]);
+  const [file, setFile] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [rejected, setRejected] = useState([]);
   const [courseName, setCourseName] = useState("");
   const [details, setDetails] = useState("");
   const [teacherName, setTeacherName] = useState("");
-
-  const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-    if (acceptedFiles?.length) {
-      setFiles((previousFiles) => [
-        ...acceptedFiles.map((file) =>
-          Object.assign(file, { preview: URL.createObjectURL(file) })
-        ),
-      ]);
-    }
-
-    if (rejectedFiles?.length) {
-      setRejected((previousFiles) => [...previousFiles, ...rejectedFiles]);
-    }
-  }, []);
 
   useEffect(() => {
     setTeacherName(session?.user?.name);
   }, [session]);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: "video/*",
-    maxFiles: 1,
-    onDrop,
-  });
-
-  useEffect(() => {
-    return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
-  }, [files]);
-
-  const action = async () => {
-    const file = files[0];
+  async function action() {
     if (!file || !courseName || !details) {
       showToast("Empty Fields Found");
     } else {
       setLoading(true);
-      const formData = new FormData();
-
-      formData.append("file", file);
-      formData.append("courseName", courseName);
-      formData.append("details", details);
-      formData.append("name", teacherName);
-      formData.append("email", session?.user?.email);
-      formData.append("userID", session?.user?.id);
-      formData.append("role", session?.user?.role);
-      console.log(formData);
-      if (formData) {
-        try {
-          const response = await fetch("/api/uploadCourse", {
-            method: "POST",
-            body: formData,
-          });
-          if (response.ok) {
-            router.push("/");
-          } else {
-            showToast(err, "Error occurred while uploading course");
-            setLoading(false);
+      const name = file.name;
+      const storageRef = ref(storage, `Course/${name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          switch (snapshot.state) {
+            case "paused":
+              showToast("Upload is paused");
+              break;
+            case "running":
+              showToast("Upload is running");
+              break;
           }
-        } catch (err) {
-          console.error("error", err);
-          setLoading(false);
-          showToast(err, "Error occurred while uploading course");
+        },
+        (error) => {
+          message.error(error.message);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
+            const body = {
+              courseName: courseName,
+              details: details,
+              name: teacherName,
+              videoURL: url,
+              userID: session.user.id,
+              email: session.user.email,
+              role: session.user.role,
+            };
+            try {
+              const response = await fetch("/api/uploadCourse", {
+                method: "POST",
+                body: JSON.stringify(body),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+              if (response.ok) {
+                router.push("/");
+              } else {
+                showToast(err, "Error occurred while uploading course");
+                setLoading(false);
+              }
+            } catch (err) {
+              console.error("error", err);
+              setLoading(false);
+              showToast(err, "Error occurred while uploading course");
+            }
+          });
         }
-      }
+      );
     }
-  };
+  }
 
   return (
     <>
@@ -122,25 +121,19 @@ const Dropzone = ({ className }) => {
             </div>
           </section>
           <span className="text-gray-700">Upload Video:</span>
-          <div {...getRootProps({ className: className })}>
-            <input {...getInputProps({ name: "file" })} />
-            <div className="flex cursor-pointer flex-col items-center justify-center gap-4">
-              <ArrowUpTrayIcon className="h-5 w-5 fill-current" />
-              {isDragActive ? (
-                <p>Drop the files here ...</p>
-              ) : (
-                <p className="text-center">
-                  Drag & drop files here, or click to select files
-                </p>
-              )}
-            </div>
-          </div>
+          <input
+            type="file"
+            accept=".mp4,.avi,.mov,.mkv"
+            name="video"
+            className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
           <div className=" mt-8 flex items-center justify-center self-center font-[700] text-[red]">
-            {files.length > 0 && (
+            {file.length > 0 && (
               <div>
                 <p>
                   <span>Selected File: </span>
-                  {files[0].name}
+                  {file[0].name}
                 </p>
               </div>
             )}

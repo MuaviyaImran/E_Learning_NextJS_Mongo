@@ -23,8 +23,8 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/settings" className="text-white hover:text-[#FFC1A3]">
-              Settings
+            <Link href="/createQuiz" className="text-white hover:text-[#FFC1A3]">
+              Create Quiz
             </Link>
           </li>
           <li>
@@ -64,22 +64,10 @@ const Sidebar = () => {
               Upload Books
             </Link>
           </li>
-          <li>
-            <Link
-              href="/certificates"
-              className="text-white hover:text-[#FFC1A3]"
-            >
-              Certificates
-            </Link>
-          </li>
+          
           <li>
             <Link href="/about" className="text-white hover:text-[#FFC1A3]">
               About Us
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" className="text-white hover:text-[#FFC1A3]">
-              Contact Us
             </Link>
           </li>
           <li>

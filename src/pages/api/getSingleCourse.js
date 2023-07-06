@@ -4,7 +4,6 @@ import dbConnect from "../../database/conn";
 export default async function handler(req, res) {
   if (req.method === "GET") {
     const searchQuery = req.query.courseID;
-    console.log(searchQuery);
     if (!searchQuery) {
       return res.status(400).json({
         status: false,
@@ -14,7 +13,6 @@ export default async function handler(req, res) {
       try {
         await dbConnect();
         const course = await CourseModel.findOne({ _id: searchQuery });
-        console.log(course);
         if (!course) {
           return res.status(200).json([]);
         }

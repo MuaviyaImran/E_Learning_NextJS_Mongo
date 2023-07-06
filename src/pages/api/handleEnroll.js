@@ -6,7 +6,6 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const { userID, courseID } = req.body;
-      console.log("userID", userID, "courseID", courseID);
       await dbConnect();
 
       User.findByIdAndUpdate(

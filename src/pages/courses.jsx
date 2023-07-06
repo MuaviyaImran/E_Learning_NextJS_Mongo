@@ -61,7 +61,6 @@ const CoursePage = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setCourses(data); // Assuming the API response returns the books array directly
         setLoading(false);
       } else {

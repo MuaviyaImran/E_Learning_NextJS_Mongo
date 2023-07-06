@@ -6,6 +6,8 @@ import Head from "next/head";
 import { useSession } from "next-auth/react";
 import { ToastContainer } from "react-toastify";
 import showToast from "../lib/toast";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebaseConfig";
 
 const Profile = () => {
   const session = useSession().data;
@@ -18,6 +20,10 @@ const Profile = () => {
   const [phone, setPhone] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const [email, setEmail] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  useEffect(() => {
+  }, [selectedFile]);
 
   useEffect(() => {
     if (session?.user?.id) {
@@ -53,31 +59,84 @@ const Profile = () => {
   const handleFormSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const requestBody = {
-      fname: Fname,
-      lname: Lname,
-      role: role,
-      education: education,
-      phone: phone,
-      userID: session?.user?.id,
-      email: email,
-    };
-    try {
-      const response = await fetch("/api/updateProfile", {
-        method: "POST",
-        body: JSON.stringify(requestBody),
-        headers: {
-          "Content-Type": "application/json", // Set the Content-Type header to application/json
+    if (selectedFile) {
+      const name = selectedFile.name;
+      const storageRef = ref(storage, `profilePic/${name}`);
+      const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          switch (snapshot.state) {
+            case "paused":
+              showToast("Upload is paused");
+              break;
+            case "running":
+              showToast("Upload is running");
+              break;
+          }
         },
-      });
-      const data = await response.json();
-      if (data.success) {
-        showToast("Profile Updated");
+        (error) => {
+          message.error(error.message);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
+            const requestBody = {
+              fname: Fname,
+              lname: Lname,
+              profilePic: url,
+              role: role,
+              education: education,
+              phone: phone,
+              userID: session?.user?.id,
+              email: email,
+            };
+            try {
+              const response = await fetch("/api/updateProfile", {
+                method: "POST",
+                body: JSON.stringify(requestBody),
+                headers: {
+                  "Content-Type": "application/json", // Set the Content-Type header to application/json
+                },
+              });
+              const data = await response.json();
+              if (data.success) {
+                showToast("Profile Updated");
+                setLoading(false);
+              }
+            } catch (error) {
+              console.error("Error uploading profile picture:", error);
+              setLoading(false);
+            }
+          });
+        }
+      );
+    } else {
+      const requestBody = {
+        fname: Fname,
+        lname: Lname,
+        role: role,
+        education: education,
+        phone: phone,
+        userID: session?.user?.id,
+        email: email,
+      };
+      try {
+        const response = await fetch("/api/updateProfile", {
+          method: "POST",
+          body: JSON.stringify(requestBody),
+          headers: {
+            "Content-Type": "application/json", // Set the Content-Type header to application/json
+          },
+        });
+        const data = await response.json();
+        if (data.success) {
+          showToast("Profile Updated");
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error uploading profile picture:", error);
         setLoading(false);
       }
-    } catch (error) {
-      console.error("Error uploading profile picture:", error);
-      setLoading(false);
     }
   };
 
@@ -106,6 +165,7 @@ const Profile = () => {
                   />
                 </div>
               </div>
+
               <div className="mx-auto max-w-md p-6">
                 <h2 className="mb-4 text-2xl font-[700]">Your Profile</h2>
                 <form onSubmit={handleFormSubmit}>
@@ -170,14 +230,24 @@ const Profile = () => {
                       />
                     </label>
                   )}
+                  <label className="mb-4 block">
+                    <span className="text-gray-700">Profile Pic:</span>
+                    <input
+                      type="file"
+                      accept="image/jpeg, image/png"
+                      name="book"
+                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      onChange={(e) => setSelectedFile(e.target.files[0])}
+                    />
+                  </label>
                   <div className="flex items-center justify-center self-center">
-            <button
-              type="submit"
-              className=" mt-12  rounded-md border border-[#FFC1A3] px-5 py-3 text-[12px] font-bold uppercase tracking-wider text-stone-500 transition-colors hover:bg-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
-            >
-              Update Profile
-            </button>
-          </div>
+                    <button
+                      type="submit"
+                      className=" mt-12  rounded-md border border-[#FFC1A3] px-5 py-3 text-[12px] font-bold uppercase tracking-wider text-stone-500 transition-colors hover:bg-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                    >
+                      Update Profile
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>

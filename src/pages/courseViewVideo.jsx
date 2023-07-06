@@ -26,7 +26,6 @@ const CourseDetails = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setCourseDetails(data); // Assuming the API response returns the books array directly
       } else {
         const errorData = await response.json();
@@ -43,8 +42,14 @@ const CourseDetails = () => {
       getCourseDetails();
     }
   }, [session]);
-  useEffect(() => {}, [courseDetails]);
-
+  const handleQuizConduct = () => {
+    if (courseDetails.quizID) {
+      router.push({
+        pathname: "/quizPage",
+        query: { quizID: courseDetails.quizID,courseName: courseDetails?.courseName },
+      });
+    }
+  };
   return (
     <div className="">
       <header>
@@ -110,6 +115,17 @@ const CourseDetails = () => {
                     value={courseDetails?.email}
                   />
                 </label>
+                {courseDetails?.quizID ? (
+                  <div className="text-center">
+                    <button
+                      onClick={handleQuizConduct}
+                      type="button"
+                      className="cursor-pointer rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-[black]"
+                    >
+                      Conduct Quiz
+                    </button>
+                  </div>
+                ) : null}
               </form>
             </div>
           </>

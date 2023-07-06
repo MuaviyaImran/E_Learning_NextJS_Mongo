@@ -28,9 +28,8 @@ const CourseDetails = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        seIAmEnrolled(data.enrolled.includes(session.user.id))
+        seIAmEnrolled(data.enrolled.includes(session.user.id));
         setCourseDetails(data); // Assuming the API response returns the books array directly
-
       } else {
         const errorData = await response.json();
         showToast(errorData.message);
@@ -52,7 +51,7 @@ const CourseDetails = () => {
       pathname: "/courseViewVideo",
       query: { courseID: courseDetails._id },
     });
-  }
+  };
   const handleEnrollMe = async () => {
     try {
       const requestBody = {
@@ -72,7 +71,6 @@ const CourseDetails = () => {
           pathname: "/courseViewVideo",
           query: { courseID: courseDetails._id },
         });
-        
       } else {
         const errorData = await response.json();
         showToast(errorData.message);
@@ -97,7 +95,6 @@ const CourseDetails = () => {
         ) : (
           <>
             <div className="hidden md:block md:w-1/2">
-              
               <img
                 className="h-full w-full object-cover object-center"
                 src="/assets/images/Online-Course.png"
@@ -153,27 +150,32 @@ const CourseDetails = () => {
                     value={courseDetails?.email}
                   />
                 </label>
-                {iAmEnrolled ? (<div className="text-center ">
-                  <p className="mb-5 text-[red] font-[600]">You Are Already Enrolled</p>
-                  <button
-                    onClick={handleViewCourse}
-                    type="button"
-                    className={`cursor-pointer  rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-[#000000]
+                {iAmEnrolled ? (
+                  <div className="text-center ">
+                    <p className="mb-5 font-[600] text-[red]">
+                      You Are Already Enrolled
+                    </p>
+                    <button
+                      onClick={handleViewCourse}
+                      type="button"
+                      className={`cursor-pointer  rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-[#000000]
                     `}
-                  >
-                    View Course
-                  </button>
-                </div>):(<div className="text-center ">
-                  <button
-                    onClick={handleEnrollMe}
-                    type="button"
-                    className={`cursor-pointer  rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-[#000000]
+                    >
+                      View Course
+                    </button>
+                  </div>
+                ) : (
+                  <div className="text-center ">
+                    <button
+                      onClick={handleEnrollMe}
+                      type="button"
+                      className={`cursor-pointer  rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-[#000000]
                     `}
-                  >
-                    Enroll Me
-                  </button>
-                </div>)}
-                
+                    >
+                      Enroll Me
+                    </button>
+                  </div>
+                )}
               </form>
             </div>
           </>
