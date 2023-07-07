@@ -29,6 +29,7 @@ const QuizPage = () => {
       downloadLink.click();
     }
   }, [certificateUrl]);
+
   const getQuiz = async () => {
     try {
       setLoading(true);
@@ -112,13 +113,61 @@ const QuizPage = () => {
       showToast(
         `Your score: ${scorePercentage}% Congratulations on your Success`
       ).then(() => {
-        generateCertificate().then(() => {
+        generateCertificate().then(async () => {
+          const body = {
+            courseName: courseName,
+            quizID: quizID,
+            studentID: session?.user?.id,
+            studentName: session?.user?.name,
+            quizStatus: "Pass",
+          };
+          try {
+            setLoading(true);
+            const response = await fetch("/api/saveQuizRecord", {
+              method: "POST",
+              body: JSON.stringify(body),
+              headers: {
+                "Content-Type": "application/json", // Set the Content-Type header to application/json
+              },
+            });
+            const data = await response.json();
+            if (data.success) {
+              setLoading(false);
+            }
+          } catch (error) {
+            console.error("Error uploading profile picture:", error);
+            setLoading(false);
+          }
           router.push("/");
         });
       });
     } else {
       showToast(`Your score: ${scorePercentage}% Better Luck Next Time`).then(
-        () => {
+        async () => {
+          const body = {
+            courseName: courseName,
+            quizID: quizID,
+            studentID: session?.user?.id,
+            studentName: session?.user?.name,
+            quizStatus: "Fail",
+          };
+          try {
+            setLoading(true);
+            const response = await fetch("/api/saveQuizRecord", {
+              method: "POST",
+              body: JSON.stringify(body),
+              headers: {
+                "Content-Type": "application/json", // Set the Content-Type header to application/json
+              },
+            });
+            const data = await response.json();
+            if (data.success) {
+              setLoading(false);
+            }
+          } catch (error) {
+            console.error("Error uploading profile picture:", error);
+            setLoading(false);
+          }
           router.push("/");
         }
       );
@@ -138,7 +187,9 @@ const QuizPage = () => {
           </div>
         ) : (
           <div className="flex h-screen flex-col justify-center">
-            <h1 className="mb-4 text-2xl font-semibold">Quiz</h1>
+            <h1 className="mb-4 text-2xl font-semibold">
+              Quiz for Course "{courseName}"
+            </h1>
 
             {/* Display the current question */}
             <div className="mb-6">
@@ -149,7 +200,7 @@ const QuizPage = () => {
             </div>
 
             {/* Display the options */}
-            <div className="mb-6">
+            <div className="mb-6 cursor-pointer">
               {currentQuestion?.options.map((option, index) => (
                 <div
                   key={index}

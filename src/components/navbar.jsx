@@ -1,5 +1,5 @@
-import { signOut, useSession } from "next-auth/react";
-import React, { MouseEvent } from "react";
+import { useSession } from "next-auth/react";
+import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 const Navbar = () => {
@@ -9,7 +9,9 @@ const Navbar = () => {
   const isBookRoute = router.pathname === "/books";
   const isCoursesRoute = router.pathname === "/courses";
   const isDashBoardRoute = router.pathname === "/";
+  const isProfileRoute = router.pathname === "/profile";
 
+  const session = useSession().data;
   return (
     <div className=" bg-black">
       <nav className="py-4">
@@ -32,6 +34,16 @@ const Navbar = () => {
             <React.Fragment>
               <Link
                 className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
+                  isProfileRoute
+                    ? "border-none underline  decoration-[#FFC1A3] decoration-2 underline-offset-8"
+                    : ""
+                } `}
+                href="/profile"
+              >
+                Profile
+              </Link>
+              <Link
+                className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
                   isDashBoardRoute
                     ? "border-none underline  decoration-[#FFC1A3] decoration-2 underline-offset-8"
                     : ""
@@ -50,16 +62,7 @@ const Navbar = () => {
               >
                 Courses
               </Link>
-              <Link
-                className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
-                  isCVMakerRoute
-                    ? "border-none underline  decoration-[#FFC1A3] decoration-2 underline-offset-8"
-                    : ""
-                } `}
-                href="/cvMaker"
-              >
-                CV Maker
-              </Link>
+
               <Link
                 className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
                   isBookRoute
@@ -69,6 +72,17 @@ const Navbar = () => {
                 href="/books"
               >
                 Books
+              </Link>
+              
+              <Link
+                className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
+                  isCVMakerRoute
+                    ? "border-none underline  decoration-[#FFC1A3] decoration-2 underline-offset-8"
+                    : ""
+                } `}
+                href="/cvMaker"
+              >
+                CV Maker
               </Link>
               <Link
                 href="/about"

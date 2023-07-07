@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
-import BottomBar from "../components/bottomBar";
 import { ToastContainer } from "react-toastify";
 import showToast from "../lib/toast";
 import { useSession } from "next-auth/react";
@@ -89,9 +88,6 @@ const BooksPage = () => {
           )}
         </div>
       </div>
-      <footer className="bottom-0">
-        <BottomBar />
-      </footer>
     </>
   );
 };

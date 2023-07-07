@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sideBar";
-import BottomBar from "../components/bottomBar";
 
 export function Main(props) {
   const router = useRouter();
@@ -32,10 +31,6 @@ export function Main(props) {
           {props.children}
         </main>
       </div>
-
-      <footer className="">
-        <BottomBar />
-      </footer>
     </div>
   );
 }

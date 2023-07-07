@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
-import BottomBar from "../components/bottomBar";
 import { PulseLoader } from "react-spinners";
 import Head from "next/head";
 import { useSession } from "next-auth/react";
@@ -254,7 +253,6 @@ const Profile = () => {
           </div>
         )}
       </div>
-      <BottomBar />
     </div>
   );
 };

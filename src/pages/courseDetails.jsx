@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
-import BottomBar from "../components/bottomBar";
 import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import showToast from "../lib/toast";
@@ -181,10 +180,6 @@ const CourseDetails = () => {
           </>
         )}
       </div>
-
-      <footer className=" bottom-0 ">
-        <BottomBar />
-      </footer>
     </div>
   );
 };

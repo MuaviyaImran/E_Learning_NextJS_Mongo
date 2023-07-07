@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
-import BottomBar from "../components/bottomBar";
 import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import showToast from "../lib/toast";
@@ -88,91 +87,102 @@ const BookUploadForm = () => {
       message.error("File not found");
     }
   };
-  return (
-    <div className="">
-      <header>
-        <Navbar />
-      </header>
-      <div className="flex items-center justify-center px-4">
-        <ToastContainer />
-        {loading ? (
-          <div className="visible flex items-center justify-center">
-            <PulseLoader color="#FF854A" size={20} />
+  if (session?.user?.role === "user") {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="mb-4 text-2xl font-bold">
+            You are not Authorized to access this Page
           </div>
-        ) : (
-          <>
-            <div className="hidden md:block md:w-1/2">
-              <img
-                className="h-full w-full object-cover object-center"
-                src="/assets/images/uploadBook.jpeg"
-                alt="Book Cover"
-              />
-            </div>
-            <div className="mx-auto max-w-md p-6">
-              <h2 className="mb-4 text-2xl">Upload Book</h2>
-              <form>
-                <label className="mb-4 block">
-                  <span className="text-gray-700">Title:</span>
-                  <input
-                    type="text"
-                    className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </label>
-                <label className="mb-4 block">
-                  <span className="text-gray-700">Author:</span>
-                  <input
-                    type="text"
-                    className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                  />
-                </label>
-                <label className="mb-4 block">
-                  <span className="text-gray-700">Description:</span>
-                  <textarea
-                    className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  ></textarea>
-                </label>
-
-                <label className="mb-4 block">
-                  <span className="text-gray-700">Book File:</span>
-                  <input
-                    type="file"
-                    accept=".pdf,.epub"
-                    name="book"
-                    className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
-                    onChange={(e) => setBookFile(e.target.files[0])}
-                  />
-                </label>
-                <div className="text-center ">
-                  <button
-                    onClick={handleUploadFile}
-                    disabled={!isFilled}
-                    type="button"
-                    className={`rounded-md  bg-[#FFC1A3] px-4 py-2 text-white ${
-                      isFilled
-                        ? "cursor-pointer hover:bg-[#FFC1A3]"
-                        : "cursor-not-allowed"
-                    }`}
-                  >
-                    Upload
-                  </button>
-                </div>
-              </form>
-            </div>
-          </>
-        )}
+          <p className="text-gray-600">
+            Please contact the administrator for assistance.
+          </p>
+        </div>
       </div>
+    );
+  } else {
+    return (
+      <div className="">
+        <header>
+          <Navbar />
+        </header>
+        <div className="flex items-center justify-center px-4">
+          <ToastContainer />
+          {loading ? (
+            <div className="visible flex items-center justify-center">
+              <PulseLoader color="#FF854A" size={20} />
+            </div>
+          ) : (
+            <>
+              <div className="hidden md:block md:w-1/2">
+                <img
+                  className="h-full w-full object-cover object-center"
+                  src="/assets/images/uploadBook.jpeg"
+                  alt="Book Cover"
+                />
+              </div>
+              <div className="mx-auto max-w-md p-6">
+                <h2 className="mb-4 text-2xl">Upload Book</h2>
+                <form>
+                  <label className="mb-4 block">
+                    <span className="text-gray-700">Title:</span>
+                    <input
+                      type="text"
+                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
+                  </label>
+                  <label className="mb-4 block">
+                    <span className="text-gray-700">Author:</span>
+                    <input
+                      type="text"
+                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      value={author}
+                      onChange={(e) => setAuthor(e.target.value)}
+                    />
+                  </label>
+                  <label className="mb-4 block">
+                    <span className="text-gray-700">Description:</span>
+                    <textarea
+                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    ></textarea>
+                  </label>
 
-      <footer className=" bottom-0 ">
-        <BottomBar />
-      </footer>
-    </div>
-  );
+                  <label className="mb-4 block">
+                    <span className="text-gray-700">Book File:</span>
+                    <input
+                      type="file"
+                      accept=".pdf,.epub"
+                      name="book"
+                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      onChange={(e) => setBookFile(e.target.files[0])}
+                    />
+                  </label>
+                  <div className="text-center ">
+                    <button
+                      onClick={handleUploadFile}
+                      disabled={!isFilled}
+                      type="button"
+                      className={`rounded-md  bg-[#FFC1A3] px-4 py-2 text-white ${
+                        isFilled
+                          ? "cursor-pointer hover:bg-[#FFC1A3]"
+                          : "cursor-not-allowed"
+                      }`}
+                    >
+                      Upload
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    );
+  }
 };
 
 export default BookUploadForm;
