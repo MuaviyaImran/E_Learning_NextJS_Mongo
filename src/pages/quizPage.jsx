@@ -15,7 +15,7 @@ const QuizPage = () => {
   const [certificateUrl, setCertificateUrl] = useState(null);
   const { data: session } = useSession();
   const router = useRouter();
-  const { quizID,courseName } = router.query;
+  const { quizID, courseName } = router.query;
 
   useEffect(() => {
     if (quizID) getQuiz();
@@ -67,7 +67,7 @@ const QuizPage = () => {
     const firstPage = pages[0];
 
     const { width, height } = firstPage.getSize();
- 
+
     const textX = width / 4;
     const textY = height / 2;
     const textX2 = width / 3;
@@ -96,6 +96,7 @@ const QuizPage = () => {
     const modifiedPdfUrl = URL.createObjectURL(modifiedPdfBlob);
     setCertificateUrl(modifiedPdfUrl);
   };
+
   const handleSubmitQuiz = () => {
     let score = 0;
     quizData.questions.forEach((question, index) => {
@@ -110,10 +111,17 @@ const QuizPage = () => {
     if (scorePercentage > 60) {
       showToast(
         `Your score: ${scorePercentage}% Congratulations on your Success`
-      );
-      generateCertificate();
+      ).then(() => {
+        generateCertificate().then(() => {
+          router.push("/");
+        });
+      });
     } else {
-      showToast(`Your score: ${scorePercentage}% Better Luck Next Time`);
+      showToast(`Your score: ${scorePercentage}% Better Luck Next Time`).then(
+        () => {
+          router.push("/");
+        }
+      );
     }
   };
 

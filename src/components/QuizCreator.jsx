@@ -2,10 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 import showToast from "../lib/toast";
 import { ToastContainer } from "react-toastify";
+import { useRouter } from "next/router";
 
 const QuizCreator = ({ selectedQuizObject }) => {
   const [numQuestions, setNumQuestions] = useState(0);
   const [questions, setQuestions] = useState([]);
+  const router = useRouter();
+  
   const handleNumQuestionsChange = (e) => {
     const count = Number(e.target.value);
     setNumQuestions(count);
@@ -35,6 +38,7 @@ const QuizCreator = ({ selectedQuizObject }) => {
     updatedQuestions[index].correctOption = Number(e.target.value);
     setQuestions(updatedQuestions);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,8 +46,9 @@ const QuizCreator = ({ selectedQuizObject }) => {
       // Send the questions array to the API endpoint
       const courseID = selectedQuizObject[0].courseID;
       const response = await axios.post("/api/quiz", { questions, courseID });
-      showToast(response.data); // Log the response from the API
-
+      showToast(response.data.message).then(() => {
+        router.push("/");
+      });
       // Reset the form or navigate to another page
       // ...
     } catch (error) {
@@ -52,7 +57,7 @@ const QuizCreator = ({ selectedQuizObject }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto max-w-md">
+    <form  className="mx-auto max-w-md">
       <ToastContainer />
       <div className="mb-4">
         <label htmlFor="numQuestions" className="font-semibold">
@@ -121,7 +126,8 @@ const QuizCreator = ({ selectedQuizObject }) => {
         </div>
       ))}
       <button
-        type="submit"
+        type="button"
+        onClick={handleSubmit}
         className="rounded bg-black px-4 py-2 font-semibold text-white hover:bg-indigo-600"
       >
         Create Quiz Questions
