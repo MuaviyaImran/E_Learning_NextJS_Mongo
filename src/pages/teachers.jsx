@@ -16,7 +16,7 @@ const Card = ({ teachers }) => {
   } = teachers;
   const formattedDate = new Date(createdAt).toLocaleDateString();
   return (
-    <div className="rounded-lg border-[#FFC1A3] bg-white p-6 shadow-xl hover:bg-[#FFC1A3]">
+    <div className="rounded-lg border-[#0086DC] bg-white p-6 shadow-xl hover:bg-[#0086DC]">
       <div className="mb-4 flex items-center justify-center">
         <img
           className="h-24 w-24 rounded-full object-cover"
@@ -51,8 +51,8 @@ const CardList = () => {
   const [loading, setLoading] = useState(false);
 
   const getTeachers = async () => {
-
-    try {setLoading(true);
+    try {
+      setLoading(true);
       const response = await fetch("/api/getTeacherList", {
         method: "GET",
       });

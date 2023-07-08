@@ -88,7 +88,7 @@ const HomePage = () => {
     return (
       <div
         onClick={handleClick}
-        className="mx-auto max-w-sm cursor-pointer rounded-lg bg-white shadow-lg hover:bg-[#FFC1A3]"
+        className="mx-auto max-w-sm cursor-pointer rounded-lg bg-white shadow-lg hover:bg-[#0086DC]"
       >
         <div className="p-4">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gray-200">
@@ -194,12 +194,12 @@ const HomePage = () => {
                           xl:leading-[28px] 2xl:px-9 2xl:text-[23px]
                           2xl:leading-[29px] 3xl:px-10 3xl:leading-[30px]"
                         >
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
+                          We uphold the highest standards of honesty and ethics
+                          in all aspects of our e-learning platform. Trust and
+                          transparency are at the core of our interactions with
+                          learners, educators, and partners. We believe in
+                          fostering an environment of integrity to ensure a
+                          reliable and credible educational experience.
                         </div>
                       </div>
                     </AnimationOnScroll>
@@ -236,12 +236,14 @@ const HomePage = () => {
                           xl:leading-[28px] 2xl:px-9 2xl:text-[23px]
                           2xl:leading-[29px] 3xl:px-10 3xl:leading-[30px]"
                         >
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
+                          We are committed to providing equal access to
+                          education for all individuals, regardless of their
+                          background or circumstances. Our e-learning platform
+                          is designed to be inclusive and accessible,
+                          accommodating different learning styles and abilities.
+                          We strive to remove barriers and empower learners from
+                          diverse communities to pursue knowledge and achieve
+                          their goals.
                         </div>
                       </div>
                     </AnimationOnScroll>
@@ -278,12 +280,13 @@ const HomePage = () => {
                           xl:leading-[28px] 2xl:px-9 2xl:text-[23px]
                           2xl:leading-[29px] 3xl:px-10 3xl:leading-[30px]"
                         >
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
+                          We embrace innovation to continuously enhance the
+                          e-learning experience for our users. Our platform
+                          leverages cutting-edge technologies and methodologies
+                          to deliver engaging and interactive learning content.
+                          We encourage creativity, exploration, and adaptability
+                          to stay ahead of evolving educational trends and
+                          empower lifelong learning.
                         </div>
                       </div>
                     </AnimationOnScroll>
@@ -292,7 +295,7 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div className="mt-8 lg:mt-16">
+            <div className="mt-8 lg:mt-10">
               <AnimationOnScroll animateIn="animate__fadeInRight">
                 <div className="flex flex-row">
                   <span className="mx-5 flex-col">
@@ -307,31 +310,56 @@ const HomePage = () => {
                     >
                       Our Story
                     </div>
-                    <div
-                      className="
-                      mt-2 overflow-hidden  whitespace-normal
-                      px-1 py-2 font-courierPrime text-[16px] font-normal 
-                      leading-[22px] text-[black]
-                      sm:text-[19px] sm:leading-[24px]
-                      md:text-[22px] md:leading-[26px]
-                      lg:text-[25px] lg:leading-[29px]
-                      xl:text-[28px] xl:leading-[32px]
-                      2xl:text-[32px] 2xl:leading-[36px]"
-                    >
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Fermentum odio eu feugiat pretium nibh ipsum
-                      consequat. At elementum eu facilisis sed odio morbi. Est
-                      ante in nibh mauris cursus. Purus faucibus ornare
-                      suspendisse sed nisi lacus. Ullamcorper morbi tincidunt
-                      ornare massa eget. Arcu vitae elementum curabitur vitae
-                      nunc sed velit. Lobortis elementum nibh tellus molestie
-                      nunc non blandit massa enim. Porta lorem mollis aliquam ut
-                      porttitor leo. Duis at tellus at urna condimentum mattis.
-                      Duis ut diam quam nulla. Platea dictumst quisque sagittis
-                      purus sit amet volutpat consequat mauris. Cras semper
-                      auctor neque vitae tempus quam. Iaculis eu non diam
-                      phasellus vestibulum lorem sed risus.
+                    <div className="overflow-hidden whitespace-normal pl-8 pr-3 font-courierPrime text-[16px] font-normal leading-[22px] text-[black] sm:text-[19px] sm:leading-[24px] md:text-[22px] md:leading-[26px] lg:text-[25px] lg:leading-[29px] xl:text-[28px] xl:leading-[32px] 2xl:text-[32px] 2xl:leading-[36px]">
+                      <p>
+                        An Electronic Learning Management System (ELMS) is a
+                        technology platform that supports the delivery,
+                        management, and administration of educational content
+                        and resources. ELMS emerged from e-learning and were
+                        first introduced in the late 1990s. With the emphasis on
+                        remote learning during the COVID-19 pandemic, ELMS usage
+                        has seen a significant growth. ELMS enables educators to
+                        create and deliver online courses, track student
+                        progress, and provide communication and collaboration
+                        tools for teachers and students.
+                      </p>
+                      <p>
+                        This technology has revolutionized the way education is
+                        delivered. With the help of ELMS, teachers can deliver
+                        engaging and interactive lessons, and students can learn
+                        from anywhere at any time. The need for electronic
+                        learning management systems (ELMS) is driven by the
+                        increasing demand for flexible and accessible education.
+                        ELMS provide a centralized platform for the delivery and
+                        management of educational content and resources, making
+                        it easy for teachers to create and deliver online
+                        courses, track student progress, and provide
+                        communication and collaboration tools for teachers and
+                        students.
+                      </p>
+                      <p>
+                        In addition, ELMS also provide a number of benefits for
+                        students. For example, ELMS allow students to access
+                        course materials and resources from anywhere, at any
+                        time, making education more convenient and accessible.
+                        They also provide tools for student collaboration and
+                        communication, which can enhance the learning experience
+                        and improve student engagement.
+                      </p>
+                      <p>
+                        The COVID-19 pandemic has further highlighted the need
+                        for ELMS as many educational institutions have had to
+                        shift to remote learning to keep students and staff
+                        safe. ELMS have played a vital role in ensuring
+                        continuity of education during this time by providing a
+                        platform for online delivery of classes, assignments,
+                        and assessments.
+                      </p>
+                      <p>
+                        Overall, the use of ELMS has become an essential part of
+                        modern education and is expected to continue growing in
+                        the future.
+                      </p>
                     </div>
                   </span>
                 </div>

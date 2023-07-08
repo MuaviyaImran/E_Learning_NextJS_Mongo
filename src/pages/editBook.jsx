@@ -9,24 +9,52 @@ import { Button, Card, Input, List, message, Image, Progress } from "antd";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebaseConfig";
 
-const BookUploadForm = () => {
+const BookEditForm = () => {
   const router = useRouter();
   const session = useSession().data;
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [isFilled, setIsFilled] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState("");
+  const [bookURL, setBookURL] = useState("");
   const [bookFile, setBookFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const { bookID } = router.query;
 
   useEffect(() => {
-    setIsFilled(title && author && description && bookFile);
-  }, [title, author, description, bookFile]);
+    if (bookID) {
+      getBook();
+    }
+  }, [bookID]);
 
-  const handleUploadFile = () => {
+  const getBook = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/getSingleBook?bookID=${bookID}`, {
+        method: "GET",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setTitle(data.BookTitle);
+        setAuthor(data.author);
+        setDescription(data.description);
+        setBookURL(data.bookFile);
+        setLoading(false);
+      } else {
+        const errorData = await response.json();
+        showToast(errorData.message);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      showToast("Failed to fetch books.");
+      setLoading(false);
+    }
+  };
+
+  const handleEditFile = async () => {
     if (bookFile) {
       setLoading(true);
-      setIsFilled(true);
       const name = bookFile.name;
       const storageRef = ref(storage, `Books/${name}`);
       const uploadTask = uploadBytesResumable(storageRef, bookFile);
@@ -58,18 +86,16 @@ const BookUploadForm = () => {
               email: session.user.email,
               role: session.user.role,
             };
-
             try {
-              const response = await fetch("/api/uploadBook", {
+              const response = await fetch(`/api/editBook?bookID=${bookID}`, {
                 method: "POST",
                 body: JSON.stringify(body),
                 headers: {
                   "Content-Type": "application/json",
                 },
               });
-
               if (response.ok) {
-                showToast("Book uploaded successfully.");
+                showToast("Book Edited successfully.");
                 router.push("/");
               } else {
                 const data = await response.json();
@@ -77,16 +103,46 @@ const BookUploadForm = () => {
               }
             } catch (error) {
               console.error("catch", error);
-              showToast("Failed to upload book.");
+              showToast("Failed to Edit book.");
             }
             setLoading(false);
           });
         }
       );
     } else {
-      message.error("File not found");
+      const body = {
+        title: title,
+        author: author,
+        description: description,
+        book: bookURL,
+        uploadedByUserID: session.user.id,
+        uploadedByName: session.user.name,
+        email: session.user.email,
+        role: session.user.role,
+      };
+      try {
+        const response = await fetch(`/api/editBook?bookID=${bookID}`, {
+          method: "POST",
+          body: JSON.stringify(body),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          showToast("Book Edited successfully.");
+          router.push("/");
+        } else {
+          const data = await response.json();
+          showToast(data.message);
+        }
+      } catch (error) {
+        console.error("catch", error);
+        showToast("Failed to Edit book.");
+      }
+      setLoading(false);
     }
   };
+
   if (session?.user?.role === "user") {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -122,7 +178,7 @@ const BookUploadForm = () => {
                 />
               </div>
               <div className="mx-auto max-w-md p-6">
-                <h2 className="mb-4 text-2xl">Upload Book</h2>
+                <h2 className="mb-4 text-2xl">Edit Book</h2>
                 <form>
                   <label className="mb-4 block">
                     <span className="text-gray-700">Title:</span>
@@ -161,18 +217,25 @@ const BookUploadForm = () => {
                       onChange={(e) => setBookFile(e.target.files[0])}
                     />
                   </label>
+                  <div className="mb-3 text-center">
+                    <a href={bookURL} target="_blank">
+                      <button
+                        type="button"
+                        className='i"cursor-pointer rounded-md border-black bg-[#0086DC] px-4 py-2 text-white 
+                         ring-black hover:bg-[#000000]'
+                      >
+                        View Book
+                      </button>
+                    </a>
+                  </div>
                   <div className="text-center ">
                     <button
-                      onClick={handleUploadFile}
-                      disabled={!isFilled}
+                      onClick={handleEditFile}
                       type="button"
-                      className={`rounded-md  bg-[#0086DC] px-4 py-2 text-white ${
-                        isFilled
-                          ? "cursor-pointer hover:bg-[#0086DC]"
-                          : "cursor-not-allowed"
-                      }`}
+                      className={`cursor-pointer  rounded-md bg-[#0086DC] px-4 py-2 
+                          text-white hover:bg-[#0086DC]`}
                     >
-                      Upload
+                      Edit
                     </button>
                   </div>
                 </form>
@@ -185,4 +248,4 @@ const BookUploadForm = () => {
   }
 };
 
-export default BookUploadForm;
+export default BookEditForm;

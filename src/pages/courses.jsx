@@ -15,7 +15,7 @@ const CourseCard = ({ course }) => {
     });
   };
   return (
-    <div className="cursor-pointer overflow-hidden rounded-md bg-white shadow-md hover:bg-[#FFC1A3]">
+    <div className="cursor-pointer overflow-hidden rounded-md bg-white shadow-md hover:bg-[#0086DC]">
       <div className="mb-6 bg-gray-200">
         <img
           src="/assets/images/Online-Course.png"
@@ -33,7 +33,7 @@ const CourseCard = ({ course }) => {
       <div className="text-center ">
         <button
           type="submit"
-          className='i"cursor-pointer mb-3 rounded-md bg-[#FFC1A3] px-4 py-2 
+          className='i"cursor-pointer mb-3 rounded-md bg-[#0086DC] px-4 py-2 
             text-white hover:bg-[black]'
           onClick={handleButton}
         >

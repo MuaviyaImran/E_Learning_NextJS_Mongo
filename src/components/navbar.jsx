@@ -33,9 +33,9 @@ const Navbar = () => {
           <li className="flex font-courierPrime text-[13px] font-normal leading-9 text-black sm:text-[16px] md:text-[22px] md:leading-9">
             <React.Fragment>
               <Link
-                className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
+                className={`mr-2 cursor-pointer text-[white] hover:text-[#0086DC] sm:mr-6 ${
                   isProfileRoute
-                    ? "border-none underline  decoration-[#FFC1A3] decoration-2 underline-offset-8"
+                    ? "border-none underline  decoration-[#0086DC] decoration-2 underline-offset-8"
                     : ""
                 } `}
                 href="/profile"
@@ -43,9 +43,9 @@ const Navbar = () => {
                 Profile
               </Link>
               <Link
-                className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
+                className={`mr-2 cursor-pointer text-[white] hover:text-[#0086DC] sm:mr-6 ${
                   isDashBoardRoute
-                    ? "border-none underline  decoration-[#FFC1A3] decoration-2 underline-offset-8"
+                    ? "border-none underline  decoration-[#0086DC] decoration-2 underline-offset-8"
                     : ""
                 } `}
                 href="/"
@@ -53,9 +53,9 @@ const Navbar = () => {
                 Dashboard
               </Link>
               <Link
-                className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
+                className={`mr-2 cursor-pointer text-[white] hover:text-[#0086DC] sm:mr-6 ${
                   isCoursesRoute
-                    ? "border-none underline  decoration-[#FFC1A3] decoration-2 underline-offset-8"
+                    ? "border-none underline  decoration-[#0086DC] decoration-2 underline-offset-8"
                     : ""
                 } `}
                 href="/courses"
@@ -64,20 +64,20 @@ const Navbar = () => {
               </Link>
 
               <Link
-                className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
+                className={`mr-2 cursor-pointer text-[white] hover:text-[#0086DC] sm:mr-6 ${
                   isBookRoute
-                    ? "border-none underline  decoration-[#FFC1A3] decoration-2 underline-offset-8"
+                    ? "border-none underline  decoration-[#0086DC] decoration-2 underline-offset-8"
                     : ""
                 } `}
                 href="/books"
               >
                 Books
               </Link>
-              
+
               <Link
-                className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
+                className={`mr-2 cursor-pointer text-[white] hover:text-[#0086DC] sm:mr-6 ${
                   isCVMakerRoute
-                    ? "border-none underline  decoration-[#FFC1A3] decoration-2 underline-offset-8"
+                    ? "border-none underline  decoration-[#0086DC] decoration-2 underline-offset-8"
                     : ""
                 } `}
                 href="/cvMaker"
@@ -86,9 +86,9 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/about"
-                className={`mr-2 cursor-pointer text-[white] hover:text-[#FFC1A3] sm:mr-6 ${
+                className={`mr-2 cursor-pointer text-[white] hover:text-[#0086DC] sm:mr-6 ${
                   isAboutRoute
-                    ? "border-none underline  decoration-[#FFC1A3] decoration-2 underline-offset-8"
+                    ? "border-none underline  decoration-[#0086DC] decoration-2 underline-offset-8"
                     : ""
                 } `}
               >

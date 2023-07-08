@@ -21,8 +21,7 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
 
-  useEffect(() => {
-  }, [selectedFile]);
+  useEffect(() => {}, [selectedFile]);
 
   useEffect(() => {
     if (session?.user?.id) {
@@ -172,7 +171,7 @@ const Profile = () => {
                     <span className="text-gray-700">First Name:</span>
                     <input
                       type="text"
-                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                       value={Fname}
                       onChange={(e) => setFName(e.target.value)}
                     />
@@ -181,7 +180,7 @@ const Profile = () => {
                     <span className="text-gray-700">Last Name:</span>
                     <input
                       type="text"
-                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                       value={Lname}
                       onChange={(e) => setLName(e.target.value)}
                     />
@@ -189,7 +188,7 @@ const Profile = () => {
                   <label className="mb-4 block">
                     <span className="text-gray-700">Phone:</span>
                     <input
-                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                       value={phone}
                       type="phone"
                       maxLength={11}
@@ -203,7 +202,7 @@ const Profile = () => {
                     <input
                       disabled
                       type="text"
-                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                       value={email || ""}
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -213,7 +212,7 @@ const Profile = () => {
                     <span className="text-gray-700">Your Role:</span>
                     <input
                       disabled
-                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                       value={role || ""}
                       onChange={(e) => setRole(e.target.value)}
                     />
@@ -223,7 +222,7 @@ const Profile = () => {
                       <span className="text-gray-700">Education:</span>
                       <input
                         name="role"
-                        className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                        className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                         value={education}
                         onChange={(e) => setEducation(e.target.value)}
                       />
@@ -235,14 +234,14 @@ const Profile = () => {
                       type="file"
                       accept="image/jpeg, image/png"
                       name="book"
-                      className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                       onChange={(e) => setSelectedFile(e.target.files[0])}
                     />
                   </label>
                   <div className="flex items-center justify-center self-center">
                     <button
                       type="submit"
-                      className=" mt-12  rounded-md border border-[#FFC1A3] px-5 py-3 text-[12px] font-bold uppercase tracking-wider text-stone-500 transition-colors hover:bg-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                      className=" mt-12  rounded-md border border-[#0086DC] px-5 py-3 text-[12px] font-bold uppercase tracking-wider text-stone-500 transition-colors hover:bg-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                     >
                       Update Profile
                     </button>

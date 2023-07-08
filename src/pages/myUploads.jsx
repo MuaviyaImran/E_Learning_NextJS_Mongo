@@ -11,7 +11,10 @@ const CourseCard = ({ course }) => {
 
   const [loading, setLoading] = useState(false);
   const handleButton = () => {
-    console.log("Edit Pressed", course._id);
+    router.push({
+      pathname: "/editCourse",
+      query: { courseID: course._id },
+    });
   };
 
   const handleDelete = async () => {
@@ -37,7 +40,7 @@ const CourseCard = ({ course }) => {
   };
 
   return (
-    <div className="cursor-pointer overflow-hidden rounded-md bg-white shadow-md hover:bg-[#FFC1A3]">
+    <div className="cursor-pointer overflow-hidden rounded-md bg-white shadow-md hover:bg-[#0086DC]">
       <ToastContainer />
       <div className="mb-6 bg-gray-200">
         <img
@@ -57,7 +60,7 @@ const CourseCard = ({ course }) => {
         <div className="text-center">
           <button
             type="submit"
-            className="mb-3 mr-2 cursor-pointer rounded-md bg-[#FFC1A3] hover:bg-black px-4 py-2 text-white"
+            className="mb-3 mr-2 cursor-pointer rounded-md bg-[#0086DC] px-4 py-2 text-white hover:bg-black"
             onClick={handleButton}
           >
             Edit
@@ -66,7 +69,7 @@ const CourseCard = ({ course }) => {
         <div className="text-center">
           <button
             type="submit"
-            className="mb-3 cursor-pointer rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-black"
+            className="mb-3 cursor-pointer rounded-md bg-[#0086DC] px-4 py-2 text-white hover:bg-black"
             onClick={handleDelete}
           >
             Delete
@@ -77,9 +80,13 @@ const CourseCard = ({ course }) => {
   );
 };
 const BookCard = ({ book }) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const handleButton = () => {
-    console.log("Edit Pressed", book._id);
+    router.push({
+      pathname: "/editBook",
+      query: { bookID: book._id },
+    });
   };
 
   const handleDelete = async () => {
@@ -104,7 +111,7 @@ const BookCard = ({ book }) => {
     }
   };
   return (
-    <div className="rounded-lg border-[#FFC1A3] bg-white shadow-xl hover:bg-[#FFC1A3]">
+    <div className="rounded-lg border-[#0086DC] bg-white shadow-xl hover:bg-[#0086DC]">
       <div className="mb-4 flex items-center justify-center">
         <img src="/assets/images/book.png" alt="Profile" />
       </div>
@@ -124,7 +131,7 @@ const BookCard = ({ book }) => {
           <div className="text-center">
             <button
               type="submit"
-              className="mb-3 mr-2 cursor-pointer rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-black"
+              className="mb-3 mr-2 cursor-pointer rounded-md bg-[#0086DC] px-4 py-2 text-white hover:bg-black"
               onClick={handleButton}
             >
               Edit
@@ -133,7 +140,7 @@ const BookCard = ({ book }) => {
           <div className="text-center">
             <button
               type="submit"
-              className="mb-3 cursor-pointer rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-black"
+              className="mb-3 cursor-pointer rounded-md bg-[#0086DC] px-4 py-2 text-white hover:bg-black"
               onClick={handleDelete}
             >
               Delete
@@ -210,79 +217,98 @@ const UploadsPage = () => {
       showToast("Failed to fetch books.");
     }
   };
-  return (
-    <>
-      <Navbar />
-      <div className="container p-4">
-        <h1 className="mb-4 flex justify-center text-[27px] font-bold">
-          My Uploads
-        </h1>
-
-        <div className="flex space-x-4">
-          <button
-            className={`rounded-lg px-4 py-2 ${
-              activeTab === "books" ? "bg-[#FFC1A3] hover:bg-black text-white" : "bg-gray-200"
-            }`}
-            onClick={() => handleTabClick("books")}
-          >
-            Books
-          </button>
-          <button
-            className={`rounded-lg px-4 py-2 ${
-              activeTab === "courses" ? "bg-[#FFC1A3] hover:bg-black text-white" : "bg-gray-200"
-            }`}
-            onClick={() => handleTabClick("courses")}
-          >
-            Courses
-          </button>
+  if (session?.user?.role === "user") {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="mb-4 text-2xl font-bold">
+            You are not Authorized to access this Page
+          </div>
+          <p className="text-gray-600">
+            Please contact the administrator for assistance.
+          </p>
         </div>
-
-        {activeTab === "books" && (
-          <div className="mt-4">
-            <h2 className="mb-2 text-xl font-bold">Uploaded Books</h2>
-            <ul>
-              {/* Dummy data for books */}
-              <div className="container mx-auto">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                  {loading ? (
-                    <div className="visible flex items-center justify-center">
-                      <PulseLoader color="#FF854A" size={20} />
-                    </div>
-                  ) : (
-                    books?.map((book) => (
-                      <BookCard key={book._id} book={book} />
-                    ))
-                  )}
-                </div>
-              </div>
-            </ul>
-          </div>
-        )}
-
-        {activeTab === "courses" && (
-          <div className="mt-4">
-            <h2 className="mb-2 text-xl font-bold">Uploaded Courses</h2>
-            <ul>
-              {/* Dummy data for courses */}
-              <div className="container mx-auto">
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                  {loading ? (
-                    <div className="visible flex items-center justify-center">
-                      <PulseLoader color="#FF854A" size={20} />
-                    </div>
-                  ) : (
-                    courses?.map((course) => (
-                      <CourseCard key={course._id} course={course} />
-                    ))
-                  )}
-                </div>
-              </div>
-            </ul>
-          </div>
-        )}
       </div>
-    </>
-  );
+    );
+  } else {
+    return (
+      <>
+        <Navbar />
+        <div className="container p-4">
+          <h1 className="mb-4 flex justify-center text-[27px] font-bold">
+            My Uploads
+          </h1>
+
+          <div className="flex space-x-4">
+            <button
+              className={`rounded-lg px-4 py-2 ${
+                activeTab === "books"
+                  ? "bg-[#0086DC] text-white hover:bg-black"
+                  : "bg-gray-200"
+              }`}
+              onClick={() => handleTabClick("books")}
+            >
+              Books
+            </button>
+            <button
+              className={`rounded-lg px-4 py-2 ${
+                activeTab === "courses"
+                  ? "bg-[#0086DC] text-white hover:bg-black"
+                  : "bg-gray-200"
+              }`}
+              onClick={() => handleTabClick("courses")}
+            >
+              Courses
+            </button>
+          </div>
+
+          {activeTab === "books" && (
+            <div className="mt-4">
+              <h2 className="mb-2 text-xl font-bold">Uploaded Books</h2>
+              <ul>
+                {/* Dummy data for books */}
+                <div className="container mx-auto">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    {loading ? (
+                      <div className="visible flex items-center justify-center">
+                        <PulseLoader color="#FF854A" size={20} />
+                      </div>
+                    ) : (
+                      books?.map((book) => (
+                        <BookCard key={book._id} book={book} />
+                      ))
+                    )}
+                  </div>
+                </div>
+              </ul>
+            </div>
+          )}
+
+          {activeTab === "courses" && (
+            <div className="mt-4">
+              <h2 className="mb-2 text-xl font-bold">Uploaded Courses</h2>
+              <ul>
+                {/* Dummy data for courses */}
+                <div className="container mx-auto">
+                  <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    {loading ? (
+                      <div className="visible flex items-center justify-center">
+                        <PulseLoader color="#FF854A" size={20} />
+                      </div>
+                    ) : (
+                      courses?.map((course) => (
+                        <CourseCard key={course._id} course={course} />
+                      ))
+                    )}
+                  </div>
+                </div>
+              </ul>
+            </div>
+          )}
+        </div>
+      </>
+    );
+  }
 };
 
 export default UploadsPage;

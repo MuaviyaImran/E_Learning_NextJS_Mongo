@@ -96,7 +96,7 @@ const Dropzone = () => {
                 <span className="text-gray-700">Course Name:</span>
                 <input
                   type="text"
-                  className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                  className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                   value={courseName}
                   onChange={(e) => setCourseName(e.target.value)}
                 />
@@ -104,7 +104,7 @@ const Dropzone = () => {
               <label className="mb-4 block">
                 <span className="text-gray-700">Description:</span>
                 <textarea
-                  className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                  className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                   value={details}
                   onChange={(e) => setDetails(e.target.value)}
                 ></textarea>
@@ -114,7 +114,7 @@ const Dropzone = () => {
                 <input
                   disabled
                   type="text"
-                  className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                  className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                   value={session?.user?.name || ""}
                 />
               </label>
@@ -125,7 +125,7 @@ const Dropzone = () => {
             type="file"
             accept=".mp4,.avi,.mov,.mkv"
             name="video"
-            className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+            className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
             onChange={(e) => setFile(e.target.files[0])}
           />
           <div className=" mt-8 flex items-center justify-center self-center font-[700] text-[red]">
@@ -142,7 +142,7 @@ const Dropzone = () => {
             <button
               onClick={action}
               type="submit"
-              className=" mt-12  rounded-md border border-[#FFC1A3] px-5 py-3 text-[12px] font-bold uppercase tracking-wider text-stone-500 transition-colors hover:bg-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+              className=" mt-12  rounded-md border border-[#0086DC] px-5 py-3 text-[12px] font-bold uppercase tracking-wider text-stone-500 transition-colors hover:bg-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
             >
               Upload Course
             </button>

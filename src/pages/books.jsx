@@ -6,9 +6,8 @@ import { useSession } from "next-auth/react";
 import PulseLoader from "react-spinners/PulseLoader";
 
 const BookCard = ({ book }) => {
-
   return (
-    <div className="rounded-lg border-[#FFC1A3] bg-white shadow-xl hover:bg-[#FFC1A3]">
+    <div className="rounded-lg border-[#0086DC] bg-white shadow-xl hover:bg-[#0086DC]">
       <div className="mb-4 flex items-center justify-center">
         <img src="/assets/images/book.png" alt="Profile" />
       </div>
@@ -28,7 +27,7 @@ const BookCard = ({ book }) => {
           <a href={book.bookFile} target="_blank">
             <button
               type="submit"
-              className='i"cursor-pointer rounded-md border-black bg-[#FFC1A3] px-4 py-2 text-white 
+              className='i"cursor-pointer rounded-md border-black bg-[#0086DC] px-4 py-2 text-white 
             ring-black hover:bg-[#000000]'
             >
               Download

@@ -108,7 +108,7 @@ const CourseDetails = () => {
                   <input
                     disabled
                     type="text"
-                    className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                    className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                     value={courseDetails?.courseName}
                   />
                 </label>
@@ -117,7 +117,7 @@ const CourseDetails = () => {
                   <input
                     disabled
                     type="text"
-                    className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                    className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                     value={courseDetails?.name}
                   />
                 </label>
@@ -125,7 +125,7 @@ const CourseDetails = () => {
                   <span className="text-gray-700">Description:</span>
                   <textarea
                     disabled
-                    className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                    className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                     value={courseDetails?.details}
                   ></textarea>
                 </label>
@@ -135,7 +135,7 @@ const CourseDetails = () => {
                     disabled
                     type="text"
                     name="book"
-                    className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                    className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                     value={(courseDetails?.enrolled.length).toString()}
                   />
                 </label>
@@ -145,7 +145,7 @@ const CourseDetails = () => {
                     disabled
                     type="text"
                     name="book"
-                    className="mt-1 block w-full rounded-md border border-[#FFC1A3] p-3 shadow-sm ring-[#FFC1A3] focus:border-[#FFC1A3] focus:ring-[#FFC1A3]"
+                    className="mt-1 block w-full rounded-md border border-[#0086DC] p-3 shadow-sm ring-[#0086DC] focus:border-[#0086DC] focus:ring-[#0086DC]"
                     value={courseDetails?.email}
                   />
                 </label>
@@ -157,7 +157,7 @@ const CourseDetails = () => {
                     <button
                       onClick={handleViewCourse}
                       type="button"
-                      className={`cursor-pointer  rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-[#000000]
+                      className={`cursor-pointer  rounded-md bg-[#0086DC] px-4 py-2 text-white hover:bg-[#000000]
                     `}
                     >
                       View Course
@@ -168,7 +168,7 @@ const CourseDetails = () => {
                     <button
                       onClick={handleEnrollMe}
                       type="button"
-                      className={`cursor-pointer  rounded-md bg-[#FFC1A3] px-4 py-2 text-white hover:bg-[#000000]
+                      className={`cursor-pointer  rounded-md bg-[#0086DC] px-4 py-2 text-white hover:bg-[#000000]
                     `}
                     >
                       Enroll Me
