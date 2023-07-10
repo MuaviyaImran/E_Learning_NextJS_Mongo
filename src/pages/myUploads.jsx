@@ -4,7 +4,7 @@ import showToast from "../lib/toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import PulseLoader from "react-spinners/PulseLoader";
-
+import Head from "next/head";
 import Navbar from "../components/navbar";
 const CourseCard = ({ course }) => {
   const router = useRouter();
@@ -41,6 +41,9 @@ const CourseCard = ({ course }) => {
 
   return (
     <div className="cursor-pointer overflow-hidden rounded-md bg-white shadow-md hover:bg-[#0086DC]">
+      <Head>
+        <title>My Uploads</title>
+      </Head>
       <ToastContainer />
       <div className="mb-6 bg-gray-200">
         <img

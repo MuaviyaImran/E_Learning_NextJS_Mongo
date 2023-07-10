@@ -89,6 +89,11 @@ const Sidebar = () => {
               </Link>
             </li>
           )}
+          <li>
+            <Link href="/chat" className="text-white hover:text-[#0086DC]">
+              Chat
+            </Link>
+          </li>
           {isUSer === true ? null : (
             <li>
               <Link

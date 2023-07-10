@@ -310,7 +310,14 @@ const HomePage = () => {
                     >
                       Our Story
                     </div>
-                    <div className="overflow-hidden whitespace-normal pl-8 pr-3 font-courierPrime text-[16px] font-normal leading-[22px] text-[black] sm:text-[19px] sm:leading-[24px] md:text-[22px] md:leading-[26px] lg:text-[25px] lg:leading-[29px] xl:text-[28px] xl:leading-[32px] 2xl:text-[32px] 2xl:leading-[36px]">
+                    <div className="3xl:text-24 px-5 font-courierPrime
+                          text-[14px] font-normal leading-[18px]
+                          text-[black] sm:px-6 sm:text-[16px]
+                          sm:leading-[22px] md:px-6 md:text-[18px]
+                          md:leading-[24px] lg:px-7 lg:text-[20px]
+                          lg:leading-[26px] xl:px-8 xl:text-[22px]
+                          xl:leading-[28px] 2xl:px-9 2xl:text-[23px]
+                          2xl:leading-[29px] 3xl:px-10 3xl:leading-[30px]">
                       <p>
                         An Electronic Learning Management System (ELMS) is a
                         technology platform that supports the delivery,

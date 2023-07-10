@@ -9,8 +9,7 @@ export default async function handler(req, res) {
         role: "teacher",
       });
 
-
-      res.status(200).json({ teachers});
+      res.status(200).json({ teachers });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Failed to fetch users." });

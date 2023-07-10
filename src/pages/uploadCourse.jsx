@@ -1,14 +1,17 @@
 import Dropzone from "@/components/Dropzone";
 import Navbar from "../components/navbar";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 
 export default function UploadCourse() {
-
   const session = useSession().data;
-  
+
   if (session?.user?.role === "user") {
     return (
       <div className="flex h-screen items-center justify-center">
+        <Head>
+          <title>Upload Course</title>
+        </Head>
         <div className="text-center">
           <div className="mb-4 text-2xl font-bold">
             You are not Authorized to access this Page
@@ -20,16 +23,22 @@ export default function UploadCourse() {
       </div>
     );
   } else {
-  return (
-    <><header>
-    <Navbar />
-  </header>
-  
-    <section className="px-32 py-10">
-      <div className="container">
-        <h1 className="text-3xl font-bold">Upload Course</h1>
-        <Dropzone className="mt-10 border border-neutral-200 p-8" />
-      </div>
-    </section></>
-  );}
+    return (
+      <>
+        <Head>
+          <title>Upload Course</title>
+        </Head>
+        <header>
+          <Navbar />
+        </header>
+
+        <section className="px-32 py-10">
+          <div className="container">
+            <h1 className="text-3xl font-bold">Upload Course</h1>
+            <Dropzone className="mt-10 border border-neutral-200 p-8" />
+          </div>
+        </section>
+      </>
+    );
+  }
 }

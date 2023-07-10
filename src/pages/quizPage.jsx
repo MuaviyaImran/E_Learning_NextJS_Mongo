@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import showToast from "../lib/toast";
 import Navbar from "../components/navbar";
 import { PDFDocument, rgb } from "pdf-lib";
+import Head from "next/head";
 
 const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -178,6 +179,9 @@ const QuizPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Quiz</title>
+      </Head>
       <Navbar />
       <div className="mx-auto max-w-md">
         <ToastContainer />

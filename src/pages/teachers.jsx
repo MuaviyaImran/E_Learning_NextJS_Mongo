@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Navbar from "../components/navbar";
 import PulseLoader from "react-spinners/PulseLoader";
+import Head from "next/head";
 
 const Card = ({ teachers }) => {
   const {
@@ -15,6 +16,7 @@ const Card = ({ teachers }) => {
     education,
   } = teachers;
   const formattedDate = new Date(createdAt).toLocaleDateString();
+
   return (
     <div className="rounded-lg border-[#0086DC] bg-white p-6 shadow-xl hover:bg-[#0086DC]">
       <div className="mb-4 flex items-center justify-center">
@@ -74,6 +76,9 @@ const CardList = () => {
   }, [session]);
   return (
     <>
+    <Head>
+        <title>Teachers</title>
+      </Head>
       <header>
         <Navbar />
       </header>

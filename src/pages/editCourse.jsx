@@ -8,6 +8,7 @@ import { PulseLoader } from "react-spinners";
 import VidPlayer from "../components/videoPlayer";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebaseConfig";
+import Head from "next/head";
 
 const CourseDetails = () => {
   const router = useRouter();
@@ -138,17 +139,13 @@ const CourseDetails = () => {
     }
   };
 
-  // const handleQuizConduct = () => {
-  //   if (courseDetails.quizID) {
-  //     router.push({
-  //       pathname: "/quizPage",
-  //       query: { quizID: courseDetails.quizID,courseName: courseDetails?.courseName },
-  //     });
-  //   }
-  // };
+
 
   return (
     <div className="">
+      <Head>
+        <title>Edit Course</title>
+      </Head>
       <header>
         <Navbar />
       </header>

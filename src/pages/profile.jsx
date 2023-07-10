@@ -140,6 +140,9 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <Head>
+        <title>Profile</title>
+      </Head>
       <Navbar />
       <ToastContainer />
       <Head>

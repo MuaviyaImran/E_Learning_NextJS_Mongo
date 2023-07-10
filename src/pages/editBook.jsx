@@ -8,6 +8,7 @@ import { PulseLoader } from "react-spinners";
 import { Button, Card, Input, List, message, Image, Progress } from "antd";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebaseConfig";
+import Head from "next/head";
 
 const BookEditForm = () => {
   const router = useRouter();
@@ -159,6 +160,9 @@ const BookEditForm = () => {
   } else {
     return (
       <div className="">
+        <Head>
+        <title>Upload Book</title>
+      </Head>
         <header>
           <Navbar />
         </header>

@@ -34,13 +34,3 @@ async function dbConnect() {
 
 export default dbConnect;
 
-// async function dbConnect() {
-//   try {
-//     const { connection } = await mongoose.connect(MONGO_URL);
-//     if (connection.readyState == 1) {
-//       return await Promise.resolve(true);
-//     }
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// }

@@ -1,7 +1,9 @@
-import { useSession } from "next-auth/react";
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { signOut } from "next-auth/react";
+
 const Navbar = () => {
   const router = useRouter();
   const isAboutRoute = router.pathname === "/about";
@@ -11,7 +13,11 @@ const Navbar = () => {
   const isDashBoardRoute = router.pathname === "/";
   const isProfileRoute = router.pathname === "/profile";
 
-  const session = useSession().data;
+  const handleLogout = () => {
+    signOut();
+    router.push("/");
+  };
+
   return (
     <div className=" bg-black">
       <nav className="py-4">
@@ -94,6 +100,12 @@ const Navbar = () => {
               >
                 About
               </Link>
+              <RiLogoutBoxLine
+                onClick={handleLogout}
+                className="mt-1 cursor-pointer sm:mr-6"
+                size={24}
+                color="#bd1919"
+              />
             </React.Fragment>
           </li>
         </ul>

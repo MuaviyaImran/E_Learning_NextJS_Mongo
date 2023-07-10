@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import showToast from "../lib/toast";
 import { useSession } from "next-auth/react";
 import { PulseLoader } from "react-spinners";
-import VidPlayer from "../components/videoPlayer";
+import Head from "next/head";
 
 const CourseDetails = () => {
   const router = useRouter();
@@ -82,6 +82,9 @@ const CourseDetails = () => {
 
   return (
     <div className="">
+      <Head>
+        <title>Course Details</title>
+      </Head>
       <header>
         <Navbar />
       </header>

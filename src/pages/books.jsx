@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import showToast from "../lib/toast";
 import { useSession } from "next-auth/react";
 import PulseLoader from "react-spinners/PulseLoader";
+import Head from "next/head";
 
 const BookCard = ({ book }) => {
   return (
@@ -71,6 +72,9 @@ const BooksPage = () => {
 
   return (
     <>
+    <Head>
+        <title>Books</title>
+      </Head>
       <header>
         <Navbar />
       </header>

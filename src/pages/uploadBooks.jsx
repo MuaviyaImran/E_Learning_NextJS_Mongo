@@ -8,7 +8,7 @@ import { PulseLoader } from "react-spinners";
 import { Button, Card, Input, List, message, Image, Progress } from "antd";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebaseConfig";
-
+import Head from "next/head";
 const BookUploadForm = () => {
   const router = useRouter();
   const session = useSession().data;
@@ -90,6 +90,9 @@ const BookUploadForm = () => {
   if (session?.user?.role === "user") {
     return (
       <div className="flex h-screen items-center justify-center">
+        <Head>
+        <title>Upload Book</title>
+      </Head>
         <div className="text-center">
           <div className="mb-4 text-2xl font-bold">
             You are not Authorized to access this Page
@@ -103,6 +106,9 @@ const BookUploadForm = () => {
   } else {
     return (
       <div className="">
+        <Head>
+        <title>Upload Book</title>
+      </Head>
         <header>
           <Navbar />
         </header>

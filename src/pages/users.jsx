@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Navbar from "../components/navbar";
 import PulseLoader from "react-spinners/PulseLoader";
+import Head from "next/head";
 
 const Card = ({ users }) => {
   const {
@@ -72,6 +73,9 @@ const CardList = () => {
   }, [session]);
   return (
     <>
+    <Head>
+        <title>Users</title>
+      </Head>
       <header>
         <Navbar />
       </header>
