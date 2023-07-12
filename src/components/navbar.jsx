@@ -98,7 +98,7 @@ const Navbar = () => {
                     : ""
                 } `}
               >
-                About
+                About Us
               </Link>
               <RiLogoutBoxLine
                 onClick={handleLogout}

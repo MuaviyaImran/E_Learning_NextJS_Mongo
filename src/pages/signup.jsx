@@ -148,7 +148,7 @@ export default function Signup() {
               <input
                 className={styles.input_text}
                 type="phone"
-                maxlLength={11}
+                maxlength={11}
                 id="number"
                 placeholder="Number"
                 autoComplete="off"
