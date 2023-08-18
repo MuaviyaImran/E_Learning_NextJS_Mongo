@@ -1,4 +1,4 @@
-
+# E-Learning
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Tools Used
@@ -45,22 +45,12 @@ To learn more about Next.js, take a look at the following resources:
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## ScreenShots
+![Screenshot]((4).jpeg)
+![Screenshot]((1).jpeg)
+![Screenshot]((2).jpeg)
+![Screenshot]((3).jpeg)
+![Screenshot]((5).jpeg)
 
-<p align="center">
-  <img src="public/readme/ (4).jpeg?raw=true" alt="Next js starter banner"></a>
-</p>
-<p align="center">
-  <img src="public/readme/ (1).jpeg?raw=true" alt="Next js starter banner"></a>
-</p>
-<p align="center">
-  <img src="public/readme/ (2).jpeg?raw=true" alt="Next js starter banner"></a>
-</p>
-<p align="center">
-  <img src="public/readme/ (3).jpeg?raw=true" alt="Next js starter banner"></a>
-</p>
-<p align="center">
-  <img src="public/readme/ (5).jpeg?raw=true" alt="Next js starter banner"></a>
-</p>
 
 ## Deploy on Vercel
 
